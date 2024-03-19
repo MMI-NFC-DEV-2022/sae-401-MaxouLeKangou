@@ -1,8 +1,9 @@
 <script setup lang="ts">
+  import { RouterView } from 'vue-router';
 </script>
 
 <template>
   <div>
-    <h1>HELLO WORLD</h1>
+    <Suspense><RouterView /></Suspense>
   </div>
 </template>
