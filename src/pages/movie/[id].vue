@@ -6,12 +6,19 @@
 
     const route = useRoute()
     const movie = ref()
+    const casting = ref([])
 
     async function getMovie() {
         try {
             const { data } = await supabase.from('movie').select('*').eq('id', route.params.id).single()
+            const { data: dataCasting } = await supabase.from('casting').select('role, id_star').eq('id_movie', route.params.id);
+
+            for (const cast of dataCasting) {
+                const { data: dataStar } = await supabase.from('star').select('name, picture').eq('id', cast.id_star).single();
+                cast.star = dataStar
+            }
             movie.value = data
-            console.log(data)
+            casting.value = dataCasting
         } catch (error) {
             console.log(error)
         }
