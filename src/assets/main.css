@@ -7,4 +7,9 @@
 body {
 	@apply bg-gray;
 	@apply font-poppins;
+	scrollbar-width: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
