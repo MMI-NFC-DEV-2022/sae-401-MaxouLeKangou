@@ -16,7 +16,7 @@
         <header>
             <div>
                 <div class="relative w-screen h-[30vh] lg:h-screen lg:absolute">
-                    <img class="w-full h-full object-cover" v-if="movie.data.poster" :src="movie.data.poster" alt="Poster Image">
+                    <img class="w-full h-full object-cover" :src="movie.data.poster" alt="Poster Image">
                     <div class="absolute top-0 w-full h-full bg-gradient-to-t from-gray to-black/0"></div>
                     <div class="absolute top-0 w-[50%] h-full lg:bg-gradient-to-r from-gray to-black/0"></div>
                 </div>
