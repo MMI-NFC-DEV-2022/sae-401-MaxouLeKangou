@@ -3,7 +3,7 @@
 </script>
 
 <template>
-	<div>
+	<div class="text-white">
 		<h1 class="text-black">HELLO WORLD</h1>
 		<h1 @click="signInWithGithub()">CONNECTION</h1>
 	</div>

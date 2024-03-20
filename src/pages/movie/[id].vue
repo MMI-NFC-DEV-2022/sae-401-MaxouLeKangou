@@ -13,7 +13,7 @@
             const { data: dataMovie } = await supabase.from('movie').select('*').eq('id', route.params.id).single()
             const { data: dataCasting } = await supabase.from('casting').select('role, id_star').eq('id_movie', route.params.id);
 
-            
+
             for (const cast of dataCasting) {
                 const { data: dataStar } = await supabase.from('star').select('name, picture').eq('id', cast.id_star).single();
                 cast.star = dataStar
@@ -64,8 +64,8 @@
                                         <p class="text-white/60 lg:text-white">{{ movie && movie.storyline }}</p>
                                     </div>
                                     <div class="flex flex-col gap-1 text-base">
-                                        <RouterLink class="font-semibold">Director : <span class="font-normal text-white/60">{{ movie && movie.director }}</span></RouterLink>
-                                        <RouterLink class="font-semibold">Production : <span class="font-normal text-white/60">waiting...</span></RouterLink>
+                                        <RouterLink to="#" class="font-semibold">Director : <span class="font-normal text-white/60">{{ movie && movie.director }}</span></RouterLink>
+                                        <RouterLink to="#" class="font-semibold">Production : <span class="font-normal text-white/60">waiting...</span></RouterLink>
                                     </div>
                                 </div>
                             </div>
