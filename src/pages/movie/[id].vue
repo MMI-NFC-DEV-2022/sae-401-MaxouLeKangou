@@ -2,17 +2,24 @@
 <script setup lang="ts">
     import { useRoute } from 'vue-router/auto'
     import { supabase } from '@/supabase';
-    import type { Database } from '@/supabase-types';
+    import Star from '@/components/Star.vue'
 
     const route = useRoute('/movie/[id]')
-    const movie = await supabase.from('movie').select(`*,genres ( name ), casting ( role, star ( name, picture) ), star ( name, picture), product ( id_company, company ( name ) )`).eq('id', route.params.id).single();
+    const movie = await supabase.from('movie').select(`*, genres ( name ), casting ( role, star ( name, picture) ), star ( name, picture), product ( id_company, company ( name ) )`).eq('id', route.params.id).single();
+    const support = await supabase.from('support').select(`name, note, link, type`).eq('id_movie', route.params.id).order('note', { ascending: false });
+
+    const support_physical = support.data.filter((item) => item.type === 'Physical')
+    const support_digital = support.data.filter((item) => item.type === 'Digital')
+
 
     console.log(movie.data)
+    console.log(support_physical)
+    console.log(support_digital)
 
 </script>
 
 <template>    
-    <main class="text-white flex flex-col gap-10 lg:text-xl">
+    <main class="text-white flex flex-col gap-10 lg:gap-48 lg:text-xl">
         <header>
             <div>
                 <div class="relative w-screen h-[30vh] lg:h-screen lg:absolute">
@@ -54,7 +61,7 @@
             </div>
         </header>
 
-        <section v-if="movie" class="mx-5 lg:mx-48 flex flex-col gap-3 lg:gap-10">
+        <section class="mx-5 lg:mx-48 flex flex-col gap-3 lg:gap-10">
             <h2 class="font-semibold text-xl lg:text-4xl">Cast</h2>
             <div class="flex gap-4 lg:gap-8">
                 <ul v-for="celebrity of movie.data.casting" :key="celebrity.id" class="text-center lg:text-left">
@@ -66,6 +73,36 @@
                         </div>
                     </RouterLink>
                 </ul>
+            </div>
+        </section>
+
+        <section class="mx-5 lg:mx-48 flex flex-col gap-3 lg:gap-10">
+            <h2 class="font-semibold text-xl lg:text-4xl">Support</h2>
+            <div class="grid grid-cols-2 lg:grid-cols-6 gap-4 lg:gap-10 text-white/60">
+                <div class="col-span-1 lg:col-span-2 lg:col-start-2 flex flex-col gap-3 lg:gap-5">
+                    <h3 class="text-white font-semibold text-base lg:text-3xl">Physical</h3>
+                    <div v-for="item in support_physical" :key="item.id">
+                        <a :href="item.link" class="flex justify-between lg:py-5 lg:px-7 lg:bg-light_gray">
+                            <p>{{ item.name }}</p>
+                            <div class="flex gap-2 items-center">
+                                <span class="text-yellow">{{ item.note }}</span>
+                                <Star />
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-span-1 lg:col-span-2 lg:col-start-4 flex flex-col gap-3 lg:gap-5">
+                    <h3 class="text-white font-semibold text-base lg:text-3xl">Digital</h3>
+                    <div v-for="item in support_digital" :key="item.id">
+                        <a :href="item.link" class="flex justify-between lg:py-5 lg:px-7 lg:bg-light_gray">
+                            <p>{{ item.name }}</p>
+                            <div class="flex gap-2 items-center">
+                                <span class="text-yellow">{{ item.note }}</span>
+                                <Star />
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
