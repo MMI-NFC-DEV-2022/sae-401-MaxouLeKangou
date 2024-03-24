@@ -5,16 +5,11 @@
     import Star from '@/components/Star.vue'
 
     const route = useRoute('/movie/[id]')
-    const movie = await supabase.from('movie').select(`*, genres ( name ), casting ( role, star ( name, picture) ), star ( name, picture), product ( id_company, company ( name ) )`).eq('id', route.params.id).single();
+    const movie = await supabase.from('movie').select(`*, genres ( name ), casting ( id, role, star ( id, name, picture) ), star ( id, name, picture), product ( id_company, company ( name ) )`).eq('id', route.params.id).single();
     const support = await supabase.from('support').select(`name, note, link, type`).eq('id_movie', route.params.id).order('note', { ascending: false });
 
     const support_physical = support.data.filter((item) => item.type === 'Physical')
     const support_digital = support.data.filter((item) => item.type === 'Digital')
-
-
-    console.log(movie.data)
-    console.log(support_physical)
-    console.log(support_digital)
 
 </script>
 
@@ -49,8 +44,8 @@
                                     <p class="text-white/60 lg:text-white">{{ movie.data.storyline }}</p>
                                 </div>
                                 <div class="flex flex-col gap-1 text-base">
-                                    <h3 to="#" class="font-semibold">Director : <RouterLink to="#" class="font-normal text-white/60">{{ movie.data.star.name }}</RouterLink></h3>
-                                    <h3 to="#" class="font-semibold">Production : <RouterLink to="#" class="font-normal text-white/60" v-for="product of movie.data.product" :key="product.id">{{ product.company.name }}, </RouterLink></h3>
+                                    <h3 class="font-semibold">Director : <RouterLink :to="`/celebrity/${movie.data.star.id}`" class="font-normal text-white/60">{{ movie.data.star.name }}</RouterLink></h3>
+                                    <h3 class="font-semibold">Production : <RouterLink to="#" class="font-normal text-white/60" v-for="product of movie.data.product" :key="product.id">{{ product.company.name }}, </RouterLink></h3>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +58,7 @@
             <h2 class="font-semibold text-xl lg:text-4xl">Cast</h2>
             <div class="flex gap-4 lg:gap-8">
                 <ul v-for="celebrity of movie.data.casting" :key="celebrity.id" class="text-center lg:text-left">
-                    <RouterLink to="#" class="flex flex-col gap-2">
+                    <RouterLink :to="`/celebrity/${celebrity.star.id}`" class="flex flex-col gap-2">
                         <img :src="celebrity.star.picture" alt="Celebrity Image" class="h-20 w-20 lg:h-80 lg:w-56 rounded-full lg:rounded-none object-cover mx-auto">
                         <div>
                             <p class="font-semibold">{{ celebrity.role }}</p>

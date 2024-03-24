@@ -10,10 +10,10 @@
 		<h1 @click="signInWithGithub()">CONNECTION</h1>
 	</div> -->
 
-	<main class="text-white mx-5 lg:mx-48 flex flex-col gap-5 lg:mt-32">
+	<main class="text-white mx-5 lg:mx-32 flex flex-col gap-5 lg:mt-32">
 		<h2 class="text-xl font-semibold">Notre sélection pour vous</h2>
 		<div class="grid grid-cols-6 lg:grid-cols-12 gap-3 lg:gap-5">
-			<div v-for="movie of movies.data" :key="movie.id" class="col-span-3 lg:col-span-4">
+			<div v-for="movie of movies.data" :key="movie.id" class="col-span-3">
 				<RouterLink :to="`/movie/${movie.id}`">
 					<img :src="movie.poster" alt="" class="object-cover">
 				</RouterLink>
