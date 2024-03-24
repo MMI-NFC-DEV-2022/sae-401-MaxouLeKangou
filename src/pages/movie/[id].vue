@@ -21,38 +21,36 @@
 <template>    
     <main class="text-white flex flex-col gap-10 lg:gap-48 lg:text-xl">
         <header>
-            <div>
-                <div class="relative w-screen h-[30vh] lg:h-screen lg:absolute">
-                    <img class="w-full h-full object-cover" :src="movie.data.poster" alt="Poster Image">
-                    <div class="absolute top-0 w-full h-full bg-gradient-to-t from-gray to-black/0"></div>
-                    <div class="absolute top-0 w-[50%] h-full lg:bg-gradient-to-r from-gray to-black/0"></div>
-                </div>
-                
-                <div class="lg:relative lg:h-screen">
-                    <div class="grid grid-cols-6 lg:grid-cols-12 gap-3 lg:gap-5 mx-5 lg:mx-48 mt-10 lg:mt-0 lg:h-full">
-                        <div class="col-span-6 lg:flex lg:items-end lg:mb-10">
-                            <div class="flex flex-col gap-10">
-                                <div class="flex flex-col gap-1 lg:gap-4">
-                                    <h1 class="text-blue font-semibold text-2xl lg:text-6xl">{{ movie.data.title }}</h1>
-                                    <div class="text-white/60 flex flex-wrap gap-2 items-center">
-                                        <p>{{ movie.data.release }}</p>
-                                        <div class="w-1 h-1 lg:w-2 lg:h-2 bg-white/75 rounded-full"></div>
-                                        <p>{{ movie.data.time }}</p>
-                                        <div class="w-1 h-1 lg:w-2 lg:h-2 bg-white/75 rounded-full"></div>
-                                        <template v-for="genre in movie.data.genres" :key="genre.id">
-                                            <RouterLink to="#" class="block">{{ genre.name }}</RouterLink>
-                                        </template>
-                                    </div>
+            <div class="relative w-screen h-[30vh] lg:h-screen lg:absolute z-0">
+                <img class="w-full h-full object-cover" :src="movie.data.poster" alt="Poster Image">
+                <div class="absolute top-0 w-full h-full bg-gradient-to-t from-gray to-black/0"></div>
+                <div class="absolute top-0 w-[50%] h-full lg:bg-gradient-to-r from-gray to-black/0"></div>
+            </div>
+            
+            <div class="lg:relative lg:h-screen">
+                <div class="grid grid-cols-6 lg:grid-cols-12 gap-3 lg:gap-5 mx-5 lg:mx-48 mt-10 lg:mt-0 lg:h-full">
+                    <div class="col-span-6 lg:flex lg:items-end lg:mb-[10vh]">
+                        <div class="flex flex-col gap-10">
+                            <div class="flex flex-col gap-1 lg:gap-4">
+                                <h1 class="text-blue font-semibold text-2xl lg:text-6xl">{{ movie.data.title }}</h1>
+                                <div class="text-white/60 flex flex-wrap gap-2 items-center">
+                                    <p>{{ movie.data.release }}</p>
+                                    <div class="w-1 h-1 lg:w-2 lg:h-2 bg-white/75 rounded-full"></div>
+                                    <p>{{ movie.data.time }}</p>
+                                    <div class="w-1 h-1 lg:w-2 lg:h-2 bg-white/75 rounded-full"></div>
+                                    <template v-for="genre in movie.data.genres" :key="genre.id">
+                                        <RouterLink to="#" class="block">{{ genre.name }}, </RouterLink>
+                                    </template>
                                 </div>
-                                <div class="flex flex-col gap-5 lg:gap-10">
-                                    <div class="flex flex-col gap-3">
-                                        <h2 class="font-semibold text-xl lg:hidden">Storyline</h2>
-                                        <p class="text-white/60 lg:text-white">{{ movie.data.storyline }}</p>
-                                    </div>
-                                    <div class="flex flex-col gap-1 text-base">
-                                        <h3 to="#" class="font-semibold">Director : <RouterLink to="#" class="font-normal text-white/60">{{ movie.data.star.name }}</RouterLink></h3>
-                                        <h3 to="#" class="font-semibold">Production : <RouterLink to="#" class="font-normal text-white/60" v-for="product of movie.data.product" :key="product.id">{{ product.company.name }}, </RouterLink></h3>
-                                    </div>
+                            </div>
+                            <div class="flex flex-col gap-5 lg:gap-10">
+                                <div class="flex flex-col gap-3">
+                                    <h2 class="font-semibold text-xl lg:hidden">Storyline</h2>
+                                    <p class="text-white/60 lg:text-white">{{ movie.data.storyline }}</p>
+                                </div>
+                                <div class="flex flex-col gap-1 text-base">
+                                    <h3 to="#" class="font-semibold">Director : <RouterLink to="#" class="font-normal text-white/60">{{ movie.data.star.name }}</RouterLink></h3>
+                                    <h3 to="#" class="font-semibold">Production : <RouterLink to="#" class="font-normal text-white/60" v-for="product of movie.data.product" :key="product.id">{{ product.company.name }}, </RouterLink></h3>
                                 </div>
                             </div>
                         </div>
@@ -104,6 +102,10 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section class="mx-5 lg:mx-48 flex flex-col gap-3 lg:gap-10">
+            <h2 class="font-semibold text-xl lg:text-4xl">Opinion</h2>
         </section>
     </main>
 </template>
