@@ -3,6 +3,7 @@
     import { useRoute } from 'vue-router/auto'
     import { supabase } from '@/supabase';
     import Star from '@/components/Star.vue'
+    import Arrow from '@/components/Arrow.vue'
 
     const route = useRoute('/movie/[id]')
     
@@ -100,8 +101,83 @@
             </div>
         </section>
 
-        <section class="mx-5 lg:mx-48 flex flex-col gap-3 lg:gap-10">
-            <h2 class="font-semibold text-xl lg:text-4xl">Opinion</h2>
+        <section class="mx-5 lg:mx-48 flex flex-col">
+            <div class="flex flex-col gap-3 lg:gap-10">
+                <h2 class="font-semibold text-xl lg:text-4xl">Opinion</h2>
+                <div class="flex flex-col gap-3 md:grid md:grid-cols-6">
+                    <div class="bg-white/5 border border-white/10 rounded-md p-5 flex flex-col gap-3 col-span-4">
+                        <h3 class="font-semibold">Write your opinion</h3>
+                        <textarea class="border-b-[1px] border-white/25 text-xs text-white/60 focus:outline-none focus:border-white/75" placeholder="write zone" rows="5" cols="33"></textarea>
+                    </div>
+                    <div class="bg-white/5 border border-white/10 rounded-md p-5 flex flex-col gap-3 col-span-2">
+                        <h3 class="font-semibold">Support</h3>
+                        <div class="flex justify-between items-center">
+                            <div class="bg-white/10 py-1 px-2 rounded flex justify-between items-center w-[30%]">
+                                <span class="text-xs text-white/60">DVD</span>
+                                <Arrow />
+                            </div>
+                            <div class="flex gap-1">
+                                <Star />
+                                <Star />
+                                <Star />
+                                <Star />
+                                <Star />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-5">
+                    <button class="py-3 px-7 border border-white rounded-full text-xs">
+                        SEND OPINION
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-6 gap-3">
+                    <div class="bg-white/5 border border-white/10 rounded-md p-5 flex flex-col gap-3 col-span-6 sm:col-span-3 lg:col-span-2">
+                        <div class="flex gap-3 items-center">
+                            <img src="@/assets/img/avatar.jpg" class="w-10 h-10 rounded-full" alt="">
+                            <div class="flex flex-col">
+                                <p class="text-xs font-semibold">Maxime Legrand</p>
+                                <span class="text-[10px] text-white/60">18/03/24</span>
+                            </div>
+                        </div>
+                        <p class="text-xs">I am a test comment for my mobile interface. I am testing different things before the development and integration of this mockup for a SAE.</p>
+                        <div class="text-xs text-white/60 flex gap-2 items-center">
+                            <span>DVD</span>
+                            <div class="w-1 h-1 lg:w-2 lg:h-2 bg-white/75 rounded-full"></div>
+                            <div class="flex gap-1 text-yellow">
+                                <span>4</span>
+                                <Star/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-md p-5 flex flex-col gap-3 col-span-6 sm:col-span-3 lg:col-span-2">
+                        <div class="flex gap-3 items-center">
+                            <img src="@/assets/img/avatar.jpg" class="w-10 h-10 rounded-full" alt="">
+                            <div class="flex flex-col">
+                                <p class="text-xs font-semibold">Maxime Legrand</p>
+                                <span class="text-[10px] text-white/60">18/03/24</span>
+                            </div>
+                        </div>
+                        <p class="text-xs">I am a test comment for my mobile interface. I am testing different things before the development and integration of this mockup for a SAE.</p>
+                        <div class="text-xs text-white/60 flex gap-2 items-center">
+                            <span>DVD</span>
+                            <div class="w-1 h-1 lg:w-2 lg:h-2 bg-white/75 rounded-full"></div>
+                            <div class="flex gap-1 text-yellow">
+                                <span>4</span>
+                                <Star/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 </template>
+
+<style scoped>
+    textarea {
+        background-color: transparent;
+    }
+</style>
