@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { signInWithGithub, supabase } from '@/supabase';
+  import { supabase } from '@/supabase';
 
   const movies = await supabase.from('movie').select(`id, poster`);
 </script>

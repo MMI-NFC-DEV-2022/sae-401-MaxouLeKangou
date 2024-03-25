@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js'
+import { useRouter } from 'vue-router/auto'
 import { ref } from 'vue'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
@@ -10,6 +11,11 @@ export async function signInWithGithub() {
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
     })
+}
+
+export async function signOut() {
+    await supabase.auth.signOut()
+    useRouter().push('/')
 }
 
 const { data } = await supabase.auth.getUser()

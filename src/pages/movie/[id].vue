@@ -5,6 +5,7 @@
     import Star from '@/components/Star.vue'
 
     const route = useRoute('/movie/[id]')
+    
     const movie = await supabase.from('movie').select(`*, genres ( name ), casting ( id, role, star ( id, name, picture) ), star ( id, name, picture), product ( id_company, company ( name ) )`).eq('id', route.params.id).single();
     const support = await supabase.from('support').select(`name, note, link, type`).eq('id_movie', route.params.id).order('note', { ascending: false });
 
