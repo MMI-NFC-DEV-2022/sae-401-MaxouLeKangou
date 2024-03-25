@@ -7,7 +7,7 @@
     const route = useRoute('/movie/[id]')
     
     const movie = await supabase.from('movie').select(`*, genres ( name ), casting ( id, role, star ( id, name, picture) ), star ( id, name, picture), product ( id_company, company ( name ) )`).eq('id', route.params.id).single();
-    const support = await supabase.from('support').select(`name, note, link, type`).eq('id_movie', route.params.id).order('note', { ascending: false });
+    const support = await supabase.from('support').select(`id, name, note, link, type`).eq('id_movie', route.params.id).order('note', { ascending: false });
 
     const support_physical = support.data.filter((item) => item.type === 'Physical')
     const support_digital = support.data.filter((item) => item.type === 'Digital')
@@ -76,19 +76,19 @@
                 <div class="col-span-1 lg:col-span-2 lg:col-start-2 flex flex-col gap-3 lg:gap-5">
                     <h3 class="text-white font-semibold text-base lg:text-3xl">Physical</h3>
                     <div v-for="item in support_physical" :key="item.id">
-                        <a :href="item.link" class="flex justify-between lg:py-5 lg:px-7 lg:bg-light_gray">
+                        <RouterLink :to="`/support/${item.id}`" class="flex justify-between lg:py-5 lg:px-7 lg:bg-light_gray">
                             <p>{{ item.name }}</p>
                             <div class="flex gap-2 items-center">
                                 <span class="text-yellow">{{ item.note }}</span>
                                 <Star />
                             </div>
-                        </a>
+                        </RouterLink>
                     </div>
                 </div>
                 <div class="col-span-1 lg:col-span-2 lg:col-start-4 flex flex-col gap-3 lg:gap-5">
                     <h3 class="text-white font-semibold text-base lg:text-3xl">Digital</h3>
                     <div v-for="item in support_digital" :key="item.id">
-                        <a :href="item.link" class="flex justify-between lg:py-5 lg:px-7 lg:bg-light_gray">
+                        <a :href="`/support/${item.id}`" class="flex justify-between lg:py-5 lg:px-7 lg:bg-light_gray">
                             <p>{{ item.name }}</p>
                             <div class="flex gap-2 items-center">
                                 <span class="text-yellow">{{ item.note }}</span>
